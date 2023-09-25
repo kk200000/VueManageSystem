@@ -18,6 +18,7 @@ const MenuList = reactive([
       { name: 'AI问答', index: '/AiTalk' },
       { name: '国外新闻', index: '/Twitter' },
       { name: '文档解析(GPT)', index: '/AiUpload' },
+      { name: '业主交流', index: '/Chat' },
     ],
   },
   {

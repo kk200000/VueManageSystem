@@ -118,7 +118,7 @@ onMounted(() => {
   // 绘制图表
   myChart.setOption({
     title: {
-      text: 'ECharts 入门示例',
+      text: '大楼水电费情况',
     },
     tooltip: {},
     xAxis: {
