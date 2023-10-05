@@ -61,6 +61,9 @@ const handleClose = (key: string, keyPath: string[]) => {
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 15vw;
   min-height: 100vh;
+  @media screen and (max-width: 735px) {
+    min-width: 30vw;
+  }
 }
 .el-menu--collapse {
   min-height: 100vh;

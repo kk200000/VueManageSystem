@@ -10,6 +10,7 @@
     <!-- 聊天记录 -->
     <el-input
       class="min-h-full"
+      readonly
       v-model="AIMeassage"
       rows="10"
       type="textarea"
@@ -31,7 +32,6 @@ const HumanMessage = ref('')
 const AIMeassage = ref('')
 
 onMounted(() => {
-  console.log(router.currentRoute.value.params.id)
   console.log(route)
 })
 

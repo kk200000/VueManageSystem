@@ -1,10 +1,15 @@
 import axios from 'axios'
 import qs from 'qs'
 
+
+console.log("当前环境文件：", import.meta.env)
+
+
 // 创建axios实例
 const instance = axios.create({
-  baseURL: 'http://192.168.0.102:8080/', // 替换为你的后端接口地址
-  timeout: 20000, // 请求超时时间,
+
+  baseURL: import.meta.env.VITE_BASE_URL,     // 通过环境文件替换
+  timeout: 20000,               // 请求超时时间,
 
 })
 
@@ -13,6 +18,7 @@ instance.interceptors.request.use(
   config => {
     // 在请求发送之前可以做一些处理，比如添加请求头等
     config.headers.get['Access-Control-Allow-Origin'] = '*'
+
     return config
   },
   error => {

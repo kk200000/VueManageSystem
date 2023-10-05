@@ -14,11 +14,22 @@
       <el-icon class="el-icon--upload"><upload-filled /></el-icon>
       <div class="el-upload__text">拖拽到此处或 <em>点击我上传</em></div>
       <template #tip>
-        <div class="el-upload__tip">请上传文本文件给AI识别</div>
+        <div class="el-upload__tip">请上传文本文件给AI识别然后开始提问</div>
       </template>
     </el-upload>
 
-    <el-button class="ml-3" @click="submitUpload"> 开始解析 </el-button>
+    <!-- 问题 -->
+    <div class="mt-4" v-if="fileList.length > 0">
+      <el-input
+        v-model="query"
+        placeholder="请输入关于此文档的问题..."
+        class="input-with-select"
+      >
+        <template #append>
+          <el-button @click="submitUpload"> {{ btnStatus }} </el-button>
+        </template>
+      </el-input>
+    </div>
 
     <el-text class="mt-10 block mx-1" type="primary">{{ ana_res }}</el-text>
   </div>
@@ -35,7 +46,9 @@ import {
   type UploadProps,
   type UploadUserFile,
 } from 'element-plus'
-const ana_res = ref('')
+const query = ref('') // 用户的提问
+const btnStatus = ref('开始解析') // 按钮的状态
+const ana_res = ref('') // 分析的结果
 const fileList = ref<UploadUserFile[]>([
   // {
   //   name: 'mht.txt',
@@ -58,18 +71,29 @@ const handleRemove: UploadProps['onRemove'] = (file: UploadFile) => {
 const uploadRef = ref<UploadInstance>()
 const submitUpload = () => {
   uploadRef.value?.submit()
-  get('/anylysData')
+  btnStatus.value = '解析中...'
+  ElMessage.success({
+    message: '解析文件中，结果稍后会在下方显示',
+    center: true,
+  })
+  get(`/anylysData/ + ${query.value}`)
     .then((result) => {
       console.log(result?.data)
-      ana_res.value = '解析结果如下:' + result?.data
+      ana_res.value = result?.data
+      btnStatus.value = '解析完成'
     })
     .catch((err) => {})
 }
 
 onMounted(() => {
-  get('/getUploadList').then((result) => {
-    console.log(result)
-    fileList.value = result?.data
-  })
+  get('/getUploadList')
+    .then((result) => {
+      console.log(result)
+      fileList.value = result?.data
+    })
+    .catch((err) => {
+      ElMessage.error('获取文件列表失败')
+      console.log(err)
+    })
 })
 </script>

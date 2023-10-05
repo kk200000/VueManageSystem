@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import AiTalk from '../components/AiTalk.vue'
 import dataview from '../components/dataview.vue'
 import AiUpload from '../components/AiUpload.vue'
+import Chat from '../components/Chat.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -25,7 +26,12 @@ const router = createRouter({
       path: '/AiUpload',
       name: 'AiUpload',
       component: AiUpload
-    }
+    },
+    {
+      path: '/Chat',
+      name: 'Chat',
+      component: Chat
+    },
     // {
     //   path: '/moblie',
     //   name: 'moblie',

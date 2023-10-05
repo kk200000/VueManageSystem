@@ -1,6 +1,6 @@
 import { ref, computed, reactive } from 'vue'
 import { defineStore } from 'pinia'
-import * as dayjs from 'dayjs'
+import { dayjs } from 'element-plus'
 
 const useUserStore = defineStore('User', () => {
   const userName = ref('Admin')
@@ -11,7 +11,7 @@ const useUserStore = defineStore('User', () => {
   // 处理后的时间
   const LoginTime = computed(() => {
     return dayjs(lastLoginTime.value).format('YYYY年MM月DD日')
-    // return dayjs(lastLoginTime.value, "YYYY年MM月DD日")
+    // return lastLoginTime.value
   })
 
   const userInfo = reactive({

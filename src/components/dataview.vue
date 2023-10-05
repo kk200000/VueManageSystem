@@ -5,7 +5,7 @@
       <el-col :span="8">
         <!-- 登录状态卡片(左上角1) -->
         <el-card shadow="hover" class="min-w-fit">
-          <div class="userCard flex">
+          <div class="flex flex-1">
             <!-- 头像 -->
             <el-avatar
               class="mr-8"
@@ -42,7 +42,7 @@
         <!-- 水费状态卡片（左下角2） -->
         <el-card shadow="hover" class="mt-16 min-w-fit">
           <template #header>
-            <div class="card-header flex justify-between">
+            <div class="flex justify-between">
               <span>{{ isWater ? '水费详情' : '电费详情' }}</span>
               <el-button class="text-right" text @click="isWater = !isWater">
                 {{ isWater ? '看看电费' : '看看水费'
@@ -78,7 +78,8 @@
             :key="item.title"
           >
             <el-icon
-              class="h-[80px] w-[80px] leading-[30px] text-[#fff]"
+              class="!h-[80px] !w-[80px] leading-[30px]"
+              color="#fff"
               :style="{ background: item.color }"
               size="30"
             >
@@ -94,7 +95,7 @@
         </div>
 
         <!-- 下面图表 -->
-        <div id="myChart" class="w-[600px] h-[400px]"></div>
+        <div id="myChart" class="mt-6 w-[600px] h-[400px] max-2xl:hidden"></div>
       </el-col>
     </el-row>
   </div>
@@ -122,14 +123,14 @@ onMounted(() => {
     },
     tooltip: {},
     xAxis: {
-      data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'],
+      data: ['203', '301', '402', '503', '601', '702', '802'],
     },
     yAxis: {},
     series: [
       {
-        name: '销量',
+        name: '水费',
         type: 'bar',
-        data: [5, 20, 36, 10, 10, 20],
+        data: [5, 20, 36, 10, 10, 20, 99],
       },
     ],
   })
@@ -146,7 +147,7 @@ const CardList = reactive([
     color: '#51ADF3',
   },
   { title: '本月收入', icon: 'SuccessFilled', value: 100, color: '#22B8CC' },
-  { title: '跑腿订单量', icon: 'SuccessFilled', value: 100, color: '#FFBC7D' },
+  { title: '互帮互助量', icon: 'SuccessFilled', value: 100, color: '#FFBC7D' },
   {
     title: '已完成订单量',
     icon: 'SuccessFilled',
@@ -157,8 +158,8 @@ const CardList = reactive([
 const User = useUserStore()
 </script>
 
-<style scoped>
+<style>
 body {
-  background: #333;
+  background: #eee;
 }
 </style>
